@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kube-welcome-pod
+  labels:
+    name: kube-welcome-pod
+spec:
+  containers:
+    - name: kube-welcome
+      image: sklrsn/kube-welcome:latest
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      ports:
+        - containerPort: 8080
