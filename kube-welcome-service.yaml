@@ -4,7 +4,7 @@ metadata:
   name: kube-welcome-service
 spec:
   selector:
-    app: kube-welcome-pod
+    app: kube-welcome
   type: NodePort
   ports:
     - port: 3050

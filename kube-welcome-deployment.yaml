@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-welcome-deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: kube-welcome
+  template:
+    metadata:
+      labels:
+        app: kube-welcome
+    spec:
+      containers:
+        - name: kube-welcome
+          image: sklrsn/kube-welcome:latest
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8080

@@ -13,10 +13,14 @@ push:
 
 .PHONY: deploy
 deploy:
-	kubectl apply -f kube-welcome-pod.yaml
+	kubectl apply -f kube-welcome-deployment.yaml
 	kubectl apply -f kube-welcome-service.yaml
 
 .PHONY: delete
 delete:
-	kubectl delete -f kube-welcome-pod.yaml
+	kubectl delete -f kube-welcome-deployment.yaml
 	kubectl delete -f kube-welcome-service.yaml
+
+.PHONY: forward
+forward:
+	kubectl port-forward kube-welcome-deployment 8080:8080 
