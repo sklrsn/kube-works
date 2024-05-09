@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample UI</title>
+</head>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form to JSON</title>
+</head>
+
+<body>
+    <h2>Form to JSON</h2>
+    <form id="myForm">
+        <label for="name">Message:</label>
+        <input type="text" id="message" name="message"><br><br>
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+
+    <script>
+        function submitForm() {
+            var form = document.getElementById("myForm");
+            var formData = new FormData(form);
+            var jsonObject = {};
+            formData.forEach(function (value, key) {
+                jsonObject[key] = value;
+            });
+            var jsonData = JSON.stringify(jsonObject);
+
+            // Replace this with your AJAX request to send the JSON data
+            console.log(jsonData);
+
+            var jsonData = JSON.stringify(jsonObject);
+            var xhr = new XMLHttpRequest();
+            var url = "http://localhost:9090/message"; // Replace this with your server endpoint URL
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log("Data sent successfully");
+                }
+            };
+            xhr.send(jsonData);
+        }
+    </script>
+
+</body>
+
+</html>
+
+</html>
+
+<!-- https://jordanfinners.dev/blogs/how-to-easily-convert-html-form-to-json/ -->
