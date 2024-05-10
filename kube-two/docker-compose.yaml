@@ -1,4 +1,10 @@
 services:
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    restart: always
+
   nginx:
     build:
       context: nginx
@@ -7,6 +13,7 @@ services:
       - 8080:8080
     depends_on:
       - backend
+      - frontend
     restart: always
 
   backend:
@@ -28,14 +35,10 @@ services:
 
   postgres-server:
     image: postgres:16-alpine
-    ports:
-      - 5432:5432
     environment:
       - POSTGRES_PASSWORD=password
 
   redis-server:
     image: redis:7.2-alpine
     restart: always
-    ports:
-      - '6379:6379'
     command: redis-server --save 20 1 --loglevel warning --requirepass password
