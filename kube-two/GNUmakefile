@@ -1,7 +1,7 @@
 .DEFAULT_GOAL:all
 
 .PHONY: all
-all: build up
+all: down build up
 
 .PHONY: build
 build:

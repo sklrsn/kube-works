@@ -46,7 +46,7 @@
 
             var jsonData = JSON.stringify(jsonObject);
             var xhr = new XMLHttpRequest();
-            var url = "http://localhost:9090/message"; // Replace this with your server endpoint URL
+            var url = "/api/v1/message"; // Replace this with your server endpoint URL
             xhr.open("POST", url, true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.onreadystatechange = function () {
