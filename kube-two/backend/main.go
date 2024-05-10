@@ -72,16 +72,7 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/message", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
-
-		if r.Method == http.MethodOptions {
-			w.WriteHeader(http.StatusOK)
-			return
-		}
-
+	mux.HandleFunc("/api/v1/message", func(w http.ResponseWriter, r *http.Request) {
 		log.Printf("received a request from %v", r.RemoteAddr)
 		var m interface{}
 		if err := json.NewDecoder(r.Body).Decode(&m); err != nil {
