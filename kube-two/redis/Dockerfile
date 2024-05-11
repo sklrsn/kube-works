@@ -1,1 +1,1 @@
-FROM redis:7.2-alpine AS base
+FROM bitnami/redis AS base

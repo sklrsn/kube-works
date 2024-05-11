@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-postgres-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kube-postgres
+  template:
+    metadata:
+      labels:
+        app: kube-postgres
+    spec:
+      containers:
+        - name: kube-postgres
+          image: sklrsn/kube-postgres:latest
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_PASSWORD
+              value: password

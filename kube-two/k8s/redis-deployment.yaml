@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-redis-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kube-redis
+  template:
+    metadata:
+      labels:
+        app: kube-redis
+    spec:
+      containers:
+        - name: kube-two-redis
+          image: sklrsn/kube-redis:latest
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 6379
+          env:
+            - name: ALLOW_EMPTY_PASSWORD
+              value: 'yes'
+            - name: REDIS_PASSWORD
+              value: password
+            - name: REDIS_MASTER_PASSWORD
+              value: password

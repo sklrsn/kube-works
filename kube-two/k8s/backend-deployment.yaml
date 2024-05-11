@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kube-backend
+  template:
+    metadata:
+      labels:
+        app: kube-backend
+    spec:
+      volumes:
+        - name: kube-backend-metrics
+          persistentVolumeClaim:
+            claimName: kube-backend-volume
+      containers:
+        - name: kube-backend
+          image: sklrsn/kube-backend:latest
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 9090
+          env:
+            - name: DB_HOST
+              value: kube-postgres-service
+            - name: DB_PASSWORD
+              value: password
+            - name: REDIS_HOST
+              value: kube-redis-service
+            - name: REDIS_PORT
+              value: "6379"
+            - name: REDIS_PASSWORD
+              value: password
+          volumeMounts:
+            - name: kube-backend-metrics
+              mountPath: /opt/backend/stats

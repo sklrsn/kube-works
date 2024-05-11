@@ -45,4 +45,7 @@ services:
       context: redis
       dockerfile: Dockerfile
     restart: always
-    command: redis-server --save 20 1 --loglevel warning --requirepass password
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_PASSWORD=password
+      - REDIS_MASTER_PASSWORD=password
