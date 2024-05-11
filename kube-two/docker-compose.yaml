@@ -34,11 +34,15 @@ services:
     restart: always
 
   postgres-server:
-    image: postgres:16-alpine
+    build:
+      context: postgres
+      dockerfile: Dockerfile
     environment:
       - POSTGRES_PASSWORD=password
 
   redis-server:
-    image: redis:7.2-alpine
+    build:
+      context: redis
+      dockerfile: Dockerfile
     restart: always
     command: redis-server --save 20 1 --loglevel warning --requirepass password
