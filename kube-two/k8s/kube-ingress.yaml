@@ -4,8 +4,6 @@ metadata:
   name: kube-ingress
   labels:
     name: kube-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:

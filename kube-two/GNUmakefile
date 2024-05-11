@@ -36,3 +36,7 @@ deploy:
 .PHONY: delete
 delete:
 	kubectl delete -f k8s
+
+.PHONY: ingress-controller
+ingress-controller:
+	kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.6.4/deploy/static/provider/cloud/deploy.yaml
