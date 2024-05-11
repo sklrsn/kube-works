@@ -13,14 +13,14 @@ spec:
       http:
         paths:
           - pathType: Prefix
-            path: "/"
+            path: /
             backend:
               service:
                 name: kube-frontend-service
                 port:
                   number: 8080
           - pathType: Prefix
-            path: "/app/"
+            path: /api/
             backend:
               service:
                 name: kube-backend-service
