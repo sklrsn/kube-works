@@ -19,10 +19,21 @@ spec:
       containers:
         - name: kube-backend
           image: sklrsn/kube-backend:latest
+          readinessProbe:
+            httpGet:
+              path: "/api/v1/health"
+              port: 9090
+          livenessProbe:
+            httpGet:
+              path: "/api/v1/health"
+              port: 9090
           resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
             limits:
-              memory: "128Mi"
-              cpu: "500m"
+              memory: "64Mi"
+              cpu: "250m"
           ports:
             - containerPort: 9090
           env:
@@ -35,7 +46,7 @@ spec:
             - name: REDIS_PORT
               value: "6379"
             - name: REDIS_PASSWORD
-              value: password  # use secrets, not this way
+              value: password # use secrets, not this way
           volumeMounts:
             - name: kube-backend-metrics
               mountPath: /opt/backend/stats

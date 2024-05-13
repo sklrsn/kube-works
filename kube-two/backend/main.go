@@ -72,6 +72,10 @@ func main() {
 
 	mux := http.NewServeMux()
 
+	mux.HandleFunc("/api/v1/health", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	})
+
 	mux.HandleFunc("/api/v1/message", func(w http.ResponseWriter, r *http.Request) {
 		log.Printf("received a request from %v", r.RemoteAddr)
 		var m interface{}
