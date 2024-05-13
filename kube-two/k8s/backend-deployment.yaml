@@ -12,6 +12,7 @@ spec:
       labels:
         app: kube-backend
     spec:
+      priorityClassName: "high-priority"
       volumes:
         - name: kube-backend-metrics
           persistentVolumeClaim:
