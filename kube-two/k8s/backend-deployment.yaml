@@ -37,17 +37,9 @@ spec:
               cpu: "250m"
           ports:
             - containerPort: 9090
-          env:
-            - name: DB_HOST
-              value: kube-postgres-service
-            - name: DB_PASSWORD
-              value: password # use secrets, not this way
-            - name: REDIS_HOST
-              value: kube-redis-service
-            - name: REDIS_PORT
-              value: "6379"
-            - name: REDIS_PASSWORD
-              value: password # use secrets, not this way
           volumeMounts:
             - name: kube-backend-metrics
               mountPath: /opt/backend/stats
+          envFrom:
+            - configMapRef:
+                name: kube-config

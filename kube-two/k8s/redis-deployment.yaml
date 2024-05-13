@@ -24,10 +24,6 @@ spec:
               cpu: "250m"
           ports:
             - containerPort: 6379
-          env:
-            - name: ALLOW_EMPTY_PASSWORD
-              value: 'yes'
-            - name: REDIS_PASSWORD
-              value: password  # use secrets, not this way
-            - name: REDIS_MASTER_PASSWORD
-              value: password  # use secrets, not this way
+          envFrom:
+            - configMapRef:
+                name: kube-config
