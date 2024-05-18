@@ -4,10 +4,17 @@ metadata:
   name: kube-ingress
   labels:
     name: kube-ingress
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   ingressClassName: nginx
+  tls:
+    - secretName: tls-secret
+      hosts:
+        - kubernetes.docker.internal
   rules:
-    - http:
+    - host: "kubernetes.docker.internal"
+      http:
         paths:
           - pathType: Prefix
             path: /
