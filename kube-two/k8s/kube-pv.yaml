@@ -7,9 +7,10 @@ spec:
     storage: 512Mi
   volumeMode: Filesystem
   accessModes:
+    - ReadWriteOnce
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   storageClassName: standard
   hostPath:
-    path: /tmp/kube
-    type: DirectoryOrCreate
+    path: /tmp
+    type: Directory
