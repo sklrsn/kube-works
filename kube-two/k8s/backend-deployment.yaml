@@ -16,7 +16,7 @@ spec:
       volumes:
         - name: kube-backend-metrics
           persistentVolumeClaim:
-            claimName: kube-backend-volume
+            claimName: kube-pvc
       containers:
         - name: kube-backend
           image: sklrsn/kube-backend:latest

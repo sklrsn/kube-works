@@ -1,11 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: kube-backend-volume
+  name: kube-pvc
 spec:
   resources:
     requests:
       storage: 10Mi
-  volumeMode: Filesystem
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
+  storageClassName: shared
+  volumeName: kube-pv
