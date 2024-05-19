@@ -7,6 +7,6 @@ spec:
     requests:
       storage: 10Mi
   accessModes:
-    - ReadWriteMany
-  storageClassName: shared
+    - ReadWriteOnce
+  storageClassName: standard
   volumeName: kube-pv

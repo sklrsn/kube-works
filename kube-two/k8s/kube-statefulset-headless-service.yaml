@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kube-backend-stateful-service
+  namespace: default
+spec:
+  selector:
+    app: kube-backend-stateful
+  sessionAffinity: None
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800
+  ports:
+    - name: kube-backend-stateful
+      protocol: TCP
+      port: 9090
+      targetPort: 9090
+  type: LoadBalancer

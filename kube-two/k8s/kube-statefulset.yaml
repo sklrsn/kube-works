@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: kube-backend-stateful-set
+spec:
+  serviceName: kube-backend-stateful-service
+  volumeClaimTemplates:
+    - metadata:
+        name: "kube-backend-stateful-volume"
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Mi
+          limits:
+            storage: 1Mi
+  replicas: 5
+  selector:
+    matchLabels:
+      app: kube-backend-stateful
+  template:
+    metadata:
+      labels:
+        app: kube-backend-stateful
+    spec:
+      priorityClassName: "high-priority"
+      volumes:
+        - name: kube-backend-metrics
+          persistentVolumeClaim:
+            claimName: kube-pvc
+      containers:
+        - name: kube-backend
+          image: sklrsn/kube-backend:latest
+          readinessProbe:
+            httpGet:
+              path: "/api/v1/health"
+              port: 9090
+          livenessProbe:
+            httpGet:
+              path: "/api/v1/health"
+              port: 9090
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "64Mi"
+              cpu: "250m"
+          ports:
+            - containerPort: 9090
+          volumeMounts:
+            - name: kube-backend-metrics
+              mountPath: /opt/backend/stats
+          envFrom:
+            - configMapRef:
+                name: kube-config
